@@ -1,12 +1,13 @@
 import random
 import datetime
+# toddbot-style vibecheck. works fine and was easy to implement
 def vibecheck():
     vibecheckpass = ["are good.", "are great.", "are within normal range.", "are huge.", "are massive.", "are fantastic.", "are radical.", "are amazing.", "are superb.", "are sublime.", "are radiant.", "are wonderful.", "are good for business.", "have raised our stock prices.", "are powerful.", "are profitable.", "are magical.", "are whimsical.", "are Employee of the Month-worthy.", "are beautiful.", "are glamourous.", "are perfection.", "are OSHA-approved.", "are in accordance with the Tenets.", "are groovy.", "are tubular.", " are way cool.", "are gnarly.", "are awesome.", "are brilliant."]
     vibecheckmystery = ["are beyond comprehension.", "have been beheld by That Which Bears No Name.", "have been stolen.", "are [DATA EXPUNGED].", "are missing.", "are gone.", "are broken.", "have been lost to the Void.", "have been taken.", "are too much for me.", "are ominous.", "are above my paygrade.", "are missingno.", "have clipped into the floor.", "are a mystery.", "are incomprehensible.", "are destabilizing the stock market.", "are unusual.", "are strange.", "are weird.", "have disappeared.", "are corrupted.", "are werewolves.", "have vanished.", "are not of this world.", "have fucked off.", "are on vacation.", "are [garbled static].", "are unreadable.", "just Are."]
     vibecheckfail = ["are bad.", "are terrible.", "are awful.", "are horrible.", "might be counterfeit.", "are ass.", "are unprofitable.", "look a bit shit.", "are horrifying.", "are musty.", "are stinky.", "are making me sad.", "are crashing the stock market.", "made me lose at the Index.", "are unholy.", "are illegal.", "are ugly.", "are not OSHA approved.", "are sad.", "are wack.", "would get you glassed.", "are atrocious.", "are smelly.", "are dogshit.", "are cheesy.", "make sweet sundae ramen look like fine dining.", "will put you in debt.", "are terrifying.", "are weak.", "are cursed, and not in the cool way."] 
-    passtext = f"Vibe check passed. Your vibes {vibecheckpass[random.randrange(0, 30)]}"
-    mysterytext = f"Vibe check ???. Your vibes {vibecheckmystery[random.randrange(0, 30)]}"
-    failtext = f"Vibe check failed. Your vibes {vibecheckfail[random.randrange(0, 30)]}"
+    passtext = f"Vibe check passed. Your vibes {random.choice(vibecheckpass)}"
+    mysterytext = f"Vibe check ???. Your vibes {random.choice(vibecheckmystery)}"
+    failtext = f"Vibe check failed. Your vibes {random.choice(vibecheckfail)}"
     vibes = random.randrange(1, 4)
     if vibes < 2:
         print(failtext)
@@ -15,6 +16,7 @@ def vibecheck():
     else:
         print(passtext)
 
+# can't stand to go without the daily cursescale.
 def cursescale():
     cursepercent = random.randrange(0, 101)
     text = f"*Username* is {cursepercent}% cursed."
@@ -23,6 +25,7 @@ def cursescale():
     else:
         print(text) 
 
+# a new scale, based on the same idea as the cursescale 
 def profitscale():
     profit = random.randrange(0, 101)
     text = f"*Username* is {profit}% profitable."
@@ -31,13 +34,14 @@ def profitscale():
     else:
         print(text)
 
+# 8ball style "ask yes or no" feature. also works and was easy to make happen
 def askProdbot():
     yes = ["Yes.", "It is certain.", "Absolutely.", "Positively.", "Why not?", "Yeah.", "Definitely.", "For sure.", "By all means."]
     no = ["No.", "Nah.", "Absolutely not.", "Negatory.", "Nein.", "Bad call, boss.", "Doesn't sound work-safe to me.", ":sparkles: No :sparkles:", "Not a chance."] 
     maybe = ["Maybe.", "Uncertain.", "Ask me after my break.", "Great question! I can't answer it.", "Probably?", "No idea.", "It is a mystery.", "Maybe, maybe not.", "Who knows."]
-    yestext = f"{yes[random.randrange(0, 9)]}"
-    notext = f"{no[random.randrange(0, 9)]}"
-    maybetext = f"{maybe[random.randrange(0, 9)]}"
+    yestext = f"{random.choice(yes)}"
+    notext = f"{random.choice(no)}"
+    maybetext = f"{random.choice(maybe)}"
     answer = random.randrange(1, 4)
     if answer < 2:
         print(notext)
@@ -46,6 +50,7 @@ def askProdbot():
     else:
         print(yestext)
 
+# this function will eventually be used to call a random meme from a json file in the directory the bot is running from. i already have a directory borrowed from the friend's bot i'm basing this function on but do not yet know how to make it call a random line from a given area in the list
 def motdGet():
     with open("motdDB.json") as motd:
         print(motd.readline())
@@ -58,6 +63,7 @@ def motd():
     hour = calendar.hour
     minute = calendar.minute
     second = calendar.second 
+    # extremely rudimentary time check function. eventual plan is to have this function bind to a channel (probably the bot channel) and post a meme every day based on the day of the week/holiday. as of right now the day check works the way it should and i'm not sure it can get much better without branching into other files, but i don't know how to make a timer without being this incredibly specific about it just yet. help is appreciated
     if hour == 8 and minute == 0 and second == 1:
         match date:
             case 1:
@@ -101,6 +107,9 @@ def motd():
                     print("mewtwo birthday")
                 else:
                     pass
+            case 9:
+                if month == 10: 
+                    print ("leif erikson day, hinga dinga durgen")
             case 10:
                 if month == 3:
                     print("mario day")
@@ -222,6 +231,3 @@ cursescale()
 profitscale()
 askProdbot()
 motd() 
-
-
-    
