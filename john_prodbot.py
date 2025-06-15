@@ -1,5 +1,45 @@
 import random
 import datetime
+import time
+import json
+import discord
+import logging
+
+greetingHelper = """Greetings! My name is John ProdBot, AnyoCorp's Employee of the Month for the past nine years running! 
+
+I'm still under development right now, but at the moment, I'm still happy to check your vibes, tell you how profitable you are today, answer your yes or no questions, or post a meme of the day for you in the mornings. In the future, I'll be able to fetch images, videos and reactions for you, remember your birthday, fetch current special Warframe mission information, and maybe even play some music for you! 
+
+All my commands start with either "prodbot" or the $ character. While I'm still under development, my commands include:
+
+> **Meme of the Day:** Bind this feature to a channel, and I'll post a meme from a curated selection for you every morning, including holidays! Set this feature up or turn it off by sending "prodbot motd" or "$motd" into the channel of your choice.
+> **Ask ProdBot:** Ask me a yes or no question with "prodbot i have a question" or "$askprodbot" and I'll do my best to answer.
+> **Vibe Check:** Enter "prodbot vibecheck [name]" or "$vibecheck [name]" and I'll tell you that person or thing's vibes.
+> **Curse Scale:** How cursed are you today? If you enter "prodbot how cursed is/are/am [name]" or "$cursescale [name]", I'll tell you.
+> **Profit Scale:** Like the curse scale, I can tell you how profitable you are today. Just say "prodbot how profitable is/are/am [name]" or "$profitscale [name]"."""
+
+plannedFeatures = """While they're not ready yet, some planned features include:
+> **Reaction Image Database:** Need to express an emotion fast? Soon I'll be able to call a random reaction image for you, categorized by emotion. You'll be able to call on me for special videos, too. Anybody want Subway? How about some grofit?
+> **ProdBot's Singalong:** Ask me to sing a song for you and I'll pull up a random entry from a list of my favorite songs.
+> **ProdBot Reacts:** I might have some things to say about special keywords in the chat.
+> **Birthday Tracker:** Soon, I'll have a feature that allows you to input your birthday. Then, when it rolls around, I'll post an announcement about it.
+> **Integrated Warframe Tracker:** Need to check today's sortie, the week's Nightwave tasks, the current time on the Plains, or the current Arbitration or fissures, but don't want to log into the game? Using the data provided by the official API, I can fetch that for you!
+> **Echobox:** Want to save that quote out of context for later use? If you put it in the echobox, I'll take it, and return another, random stored quote.
+> **Music Player:** There's nothing that adheres to the Tenets more than telling another corporation where to shove it in order to seize your desires. Invite me into your voice channel and I'll play whatever Youtube links you want, and I'll even store a cache of already-played tracks for quick recall and minimal Youtube interference."""  
+
+class ProdmanClient(discord.client)
+    async def on_ready():
+        print(greetingHelper)
+
+intents = discord.Intents.default()
+intents.message_content = True 
+
+bot = commands.Bot(command_prefix = '$', intents = intents)
+
+client = discord.Client(intents = intents)
+handler = logging.FileHandler(filename = 'discord.log', encoding = 'utf-8', mode = 'w')
+
+client.run(BOT TOKEN REMOVED FOR GITHUB COMMIT, log_handler = handler)
+    
 # toddbot-style vibecheck. works fine and was easy to implement
 def vibecheck():
     vibecheckpass = ["are good.", "are great.", "are within normal range.", "are huge.", "are massive.", "are fantastic.", "are radical.", "are amazing.", "are superb.", "are sublime.", "are radiant.", "are wonderful.", "are good for business.", "have raised our stock prices.", "are powerful.", "are profitable.", "are magical.", "are whimsical.", "are Employee of the Month-worthy.", "are beautiful.", "are glamourous.", "are perfection.", "are OSHA-approved.", "are in accordance with the Tenets.", "are groovy.", "are tubular.", " are way cool.", "are gnarly.", "are awesome.", "are brilliant."]
@@ -55,7 +95,7 @@ def motdGet():
     with open("motdDB.json") as motd:
         print(motd.readline())
 
-def motd():
+"""def motd():
     calendar = datetime.datetime.now()
     month = calendar.month
     date = calendar.day 
@@ -63,7 +103,7 @@ def motd():
     hour = calendar.hour
     minute = calendar.minute
     second = calendar.second 
-    # extremely rudimentary time check function. eventual plan is to have this function bind to a channel (probably the bot channel) and post a meme every day based on the day of the week/holiday. as of right now the day check works the way it should and i'm not sure it can get much better without branching into other files, but i don't know how to make a timer without being this incredibly specific about it just yet. help is appreciated
+    # extremely rudimentary time check function. eventual plan is to have this function bind to a channel (probably the bot channel) and post a meme every day based on the day of the week/holiday. as of right now the day check works the way it should and i'm not sure it can get much better without branching into other files, but i don't know how to make a timer without being this incredibly specific about it just yet. help is appreciated, commenting it out for the discord implementation for now so it doesn't freak it the fuck out
     if hour == 8 and minute == 0 and second == 1:
         match date:
             case 1:
@@ -224,10 +264,8 @@ def motd():
                 elif day == 6:
                     print("saturday meme")
     else:
-        pass 
+        pass"""   
 
-vibecheck() 
-cursescale()
-profitscale()
-askProdbot()
-motd() 
+@bot.command():
+    async def vibecheck(ctx, arg):
+        await ctx.send()
