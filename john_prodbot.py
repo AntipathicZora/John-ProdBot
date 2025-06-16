@@ -38,7 +38,7 @@ bot = commands.Bot(command_prefix = '$', intents = intents)
 client = discord.Client(intents = intents)
 handler = logging.FileHandler(filename = 'discord.log', encoding = 'utf-8', mode = 'w')
 
-client.run(BOT TOKEN REMOVED FOR GITHUB COMMIT, log_handler = handler)
+client.run(REDACTED, log_handler = handler)
     
 # toddbot-style vibecheck. works fine and was easy to implement
 def vibecheck():
@@ -95,7 +95,7 @@ def motdGet():
     with open("motdDB.json") as motd:
         print(motd.readline())
 
-"""def motd():
+def motd():
     calendar = datetime.datetime.now()
     month = calendar.month
     date = calendar.day 
@@ -178,15 +178,31 @@ def motdGet():
                     print("valentine's day")
                 elif month == 3:
                     print("pi day")
+                elif month == 6:
+                    print("happy birthday to this parrot in particular")
                 else:
                     pass
             case 15:
-                if month == 3:
+                if month == 1:
+                    print("boston molasses flood day")
+                elif month == 3:
                     print("ides of march")
                 else:
                     print("GIVE IT UP FOR DAY 15")
+            case 16:
+                if month == 2:
+                    print("shirley temple day")
+                else:
+                    pass
+            case 18:
+                if month == 5: 
+                    print("shrek anniversary")
+                else:
+                    pass
             case 19:
-                if month == 9:
+                if month == 7:
+                    print("one piece day")
+                elif month == 9:
                     print("pirate day")
                 elif day == 3:
                     print("wednesday the 19th")
@@ -212,6 +228,9 @@ def motdGet():
                     print("find a winter solstice meme that isn't cthulhu")
                 else: 
                     pass
+            case 22:
+                if month == 3:
+                    print("warframe anniversary")
             case 23:
                 if month == 9:
                     print("little shop of horrors")
@@ -238,9 +257,14 @@ def motdGet():
                     pass
             case 28:
                 if month == 5:
-                    print("men are coming to an end")
+                    print("squids was invented")
                 else:
                     pass
+            case 29:
+                if month == 1:
+                    print("happy birthday cars")
+                elif month == 11:
+                    print("happy birthday video games")
             case 31:
                 if month == 10:
                     print("halloween")
@@ -264,8 +288,8 @@ def motdGet():
                 elif day == 6:
                     print("saturday meme")
     else:
-        pass"""   
+        pass   
 
-@bot.command():
+@bot.command(name = "vibecheck"):
     async def vibecheck(ctx, arg):
-        await ctx.send()
+        await ctx.send(arg)
