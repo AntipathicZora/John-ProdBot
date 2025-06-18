@@ -3,6 +3,7 @@ import datetime
 import time
 import json
 import discord
+from discord.ext import commands
 import logging
 
 greetingHelper = """Greetings! My name is John ProdBot, AnyoCorp's Employee of the Month for the past nine years running! 
@@ -15,20 +16,16 @@ All my commands start with either "prodbot" or the $ character. While I'm still 
 > **Ask ProdBot:** Ask me a yes or no question with "prodbot i have a question" or "$askprodbot" and I'll do my best to answer.
 > **Vibe Check:** Enter "prodbot vibecheck [name]" or "$vibecheck [name]" and I'll tell you that person or thing's vibes.
 > **Curse Scale:** How cursed are you today? If you enter "prodbot how cursed is/are/am [name]" or "$cursescale [name]", I'll tell you.
-> **Profit Scale:** Like the curse scale, I can tell you how profitable you are today. Just say "prodbot how profitable is/are/am [name]" or "$profitscale [name]"."""
+> **Profit Scale:** Like the curse scale, I can tell you how profitable you are today. Just say "prodbot how profitable is/are/am [name]" or "$profitscale [name]".
+> **Reaction Image Database:** Need to express an emotion fast? Soon I'll be able to call a random reaction image for you, categorized by emotion. You'll be able to call on me for special videos, too. Anybody want Subway? How about some grofit?"""
 
 plannedFeatures = """While they're not ready yet, some planned features include:
-> **Reaction Image Database:** Need to express an emotion fast? Soon I'll be able to call a random reaction image for you, categorized by emotion. You'll be able to call on me for special videos, too. Anybody want Subway? How about some grofit?
 > **ProdBot's Singalong:** Ask me to sing a song for you and I'll pull up a random entry from a list of my favorite songs.
 > **ProdBot Reacts:** I might have some things to say about special keywords in the chat.
 > **Birthday Tracker:** Soon, I'll have a feature that allows you to input your birthday. Then, when it rolls around, I'll post an announcement about it.
 > **Integrated Warframe Tracker:** Need to check today's sortie, the week's Nightwave tasks, the current time on the Plains, or the current Arbitration or fissures, but don't want to log into the game? Using the data provided by the official API, I can fetch that for you!
 > **Echobox:** Want to save that quote out of context for later use? If you put it in the echobox, I'll take it, and return another, random stored quote.
 > **Music Player:** There's nothing that adheres to the Tenets more than telling another corporation where to shove it in order to seize your desires. Invite me into your voice channel and I'll play whatever Youtube links you want, and I'll even store a cache of already-played tracks for quick recall and minimal Youtube interference."""  
-
-class ProdmanClient(discord.client)
-    async def on_ready():
-        print(greetingHelper)
 
 intents = discord.Intents.default()
 intents.message_content = True 
@@ -38,10 +35,14 @@ bot = commands.Bot(command_prefix = '$', intents = intents)
 client = discord.Client(intents = intents)
 handler = logging.FileHandler(filename = 'discord.log', encoding = 'utf-8', mode = 'w')
 
-client.run(REDACTED, log_handler = handler)
-    
-# toddbot-style vibecheck. works fine and was easy to implement
-def vibecheck():
+client.run("TOKEN REDACTED FOR GITHUB COPY", log_handler = handler)
+
+@client.event
+async def on_ready():
+    print(greetingHelper)
+
+# everything below is commented out as reference code for the discord implementation because as it turns out, sending print(whatever) is not how it actually works. functions that are confirmed to be working as intended will be removed from the commented out code as i go    
+"""def vibecheck():
     vibecheckpass = ["are good.", "are great.", "are within normal range.", "are huge.", "are massive.", "are fantastic.", "are radical.", "are amazing.", "are superb.", "are sublime.", "are radiant.", "are wonderful.", "are good for business.", "have raised our stock prices.", "are powerful.", "are profitable.", "are magical.", "are whimsical.", "are Employee of the Month-worthy.", "are beautiful.", "are glamourous.", "are perfection.", "are OSHA-approved.", "are in accordance with the Tenets.", "are groovy.", "are tubular.", " are way cool.", "are gnarly.", "are awesome.", "are brilliant."]
     vibecheckmystery = ["are beyond comprehension.", "have been beheld by That Which Bears No Name.", "have been stolen.", "are [DATA EXPUNGED].", "are missing.", "are gone.", "are broken.", "have been lost to the Void.", "have been taken.", "are too much for me.", "are ominous.", "are above my paygrade.", "are missingno.", "have clipped into the floor.", "are a mystery.", "are incomprehensible.", "are destabilizing the stock market.", "are unusual.", "are strange.", "are weird.", "have disappeared.", "are corrupted.", "are werewolves.", "have vanished.", "are not of this world.", "have fucked off.", "are on vacation.", "are [garbled static].", "are unreadable.", "just Are."]
     vibecheckfail = ["are bad.", "are terrible.", "are awful.", "are horrible.", "might be counterfeit.", "are ass.", "are unprofitable.", "look a bit shit.", "are horrifying.", "are musty.", "are stinky.", "are making me sad.", "are crashing the stock market.", "made me lose at the Index.", "are unholy.", "are illegal.", "are ugly.", "are not OSHA approved.", "are sad.", "are wack.", "would get you glassed.", "are atrocious.", "are smelly.", "are dogshit.", "are cheesy.", "make sweet sundae ramen look like fine dining.", "will put you in debt.", "are terrifying.", "are weak.", "are cursed, and not in the cool way."] 
@@ -288,8 +289,88 @@ def motd():
                 elif day == 6:
                     print("saturday meme")
     else:
-        pass   
+        pass"""   
 
-@bot.command(name = "vibecheck"):
-    async def vibecheck(ctx, arg):
-        await ctx.send(arg)
+@bot.command()
+async def help(ctx):
+    await ctx.send(greetingHelper)
+
+@bot.command()
+async def planned(ctx):
+    await ctx.send(plannedfeatures)
+
+@bot.command()
+async def angery(ctx):
+    await ctx.send("a random reaction image, defined as angry by reactionDB.json")
+
+@bot.command()
+async def sad(ctx):
+    await ctx.send("a random reaction image, defined as sad by reactionDB.json")
+
+@bot.command()
+async def hug(ctx):
+    await ctx.send("a random reaction image, defined as a hug by reactionDB.json")
+
+@bot.command()
+async def kiss(ctx):
+    await ctx.send("a random reaction image, defined as a kiss by reactionDB.json")
+
+@bot.command()
+async def confused(ctx):
+    await ctx.send("a random reaction image, defined as confused by reactionDB.json")
+
+@bot.command()
+async def happy(ctx):
+    await ctx.send("a random reaction image, defined as happy by reactionDB.json")
+
+@bot.command()
+async def what(ctx):
+    await ctx.send("a random reaction image, defined as 'what the fuck' by reactionDB.json")
+
+@bot.command()
+async def no(ctx):
+    await ctx.send("a random reaction image, defined as 'no' by reactionDB.json")
+
+@bot.command()
+async def yes(ctx):
+    await ctx.send("a random reaction image, defined as 'yes' by reactionDB.json")
+
+@bot.command()
+async def subway(ctx):
+    await ctx.send("https://www.youtube.com/watch?v=y3VRXVvr6XU")
+
+@bot.command()
+async def florida(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/1071547517847732305/1305253566348529696/florida.gif")
+
+@bot.command()
+async def cursecheck(ctx, arg):
+    cursepercent = random.randInt(0, 100)
+    selftext = f"*Username* is {cursepercent}% cursed."
+    othertext = f"{arg} is {cursepercent}% cursed."
+    if arg == "me":
+        if cursepercent == 69:
+            await ctx.send(selftext + " Nice.")
+        else:
+            await ctx.send(selftext)
+    else:
+        if cursepercent == 69:
+            await ctx.send(othertext + " Nice.")
+        else:
+            await ctx.send(othertext)
+
+@bot.command()
+async def profitcheck(ctx, arg):
+    profit = random.randrange(0, 101)
+    selftext = f"*Username* is {profit}% profitable."
+    othertext = f"{arg} is {profit} profitable."
+    if arg == "me":
+        if profit > 50:
+            await ctx.send(selftext + " That's great!")
+        else:
+            await ctx.send(selftext)
+    else:
+        if profit > 50:
+            await ctx.send(othertext + " That's great!")
+        else:
+            await ctx.send(othertext)
