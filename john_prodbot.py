@@ -5,8 +5,24 @@ import json
 import discord
 from discord.ext import commands
 import logging
+import asyncio 
 
-greetingHelper = """Greetings! My name is John ProdBot, AnyoCorp's Employee of the Month for the past nine years running! 
+intents = discord.Intents.default()
+intents.message_content = True
+intents.members = True  
+
+bot = commands.Bot(command_prefix = '$', intents = intents)
+
+client = discord.Client(intents = intents)
+handler = logging.FileHandler(filename = 'discord.log', encoding = 'utf-8', mode = 'w')
+
+@bot.event
+async def on_ready():
+    print(f"Logged in as {bot.user}. (ID: {bot.user.id})")
+    
+@bot.command()
+async def help(ctx): 
+    await ctx.send("""Greetings! My name is John ProdBot, AnyoCorp's Employee of the Month for the past nine years running! 
 
 I'm still under development right now, but at the moment, I'm still happy to check your vibes, tell you how profitable you are today, answer your yes or no questions, or post a meme of the day for you in the mornings. In the future, I'll be able to fetch images, videos and reactions for you, remember your birthday, fetch current special Warframe mission information, and maybe even play some music for you! 
 
@@ -17,29 +33,84 @@ All my commands start with either "prodbot" or the $ character. While I'm still 
 > **Vibe Check:** Enter "prodbot vibecheck [name]" or "$vibecheck [name]" and I'll tell you that person or thing's vibes.
 > **Curse Scale:** How cursed are you today? If you enter "prodbot how cursed is/are/am [name]" or "$cursescale [name]", I'll tell you.
 > **Profit Scale:** Like the curse scale, I can tell you how profitable you are today. Just say "prodbot how profitable is/are/am [name]" or "$profitscale [name]".
-> **Reaction Image Database:** Need to express an emotion fast? Soon I'll be able to call a random reaction image for you, categorized by emotion. You'll be able to call on me for special videos, too. Anybody want Subway? How about some grofit?"""
+> **Reaction Image Database:** Need to express an emotion fast? Soon I'll be able to call a random reaction image for you, categorized by emotion. You'll be able to call on me for special videos, too. Anybody want Subway? How about some grofit?""")
 
-plannedFeatures = """While they're not ready yet, some planned features include:
+@bot.command()
+async def planned(ctx):
+    await ctx.send("""While they're not ready yet, some planned features include:
 > **ProdBot's Singalong:** Ask me to sing a song for you and I'll pull up a random entry from a list of my favorite songs.
 > **ProdBot Reacts:** I might have some things to say about special keywords in the chat.
 > **Birthday Tracker:** Soon, I'll have a feature that allows you to input your birthday. Then, when it rolls around, I'll post an announcement about it.
 > **Integrated Warframe Tracker:** Need to check today's sortie, the week's Nightwave tasks, the current time on the Plains, or the current Arbitration or fissures, but don't want to log into the game? Using the data provided by the official API, I can fetch that for you!
 > **Echobox:** Want to save that quote out of context for later use? If you put it in the echobox, I'll take it, and return another, random stored quote.
-> **Music Player:** There's nothing that adheres to the Tenets more than telling another corporation where to shove it in order to seize your desires. Invite me into your voice channel and I'll play whatever Youtube links you want, and I'll even store a cache of already-played tracks for quick recall and minimal Youtube interference."""  
+> **Music Player:** There's nothing that adheres to the Tenets more than telling another corporation where to shove it in order to seize your desires. Invite me into your voice channel and I'll play whatever Youtube links you want, and I'll even store a cache of already-played tracks for quick recall and minimal Youtube interference.""")
 
-intents = discord.Intents.default()
-intents.message_content = True 
+@bot.command()
+async def angery(ctx):
+    await ctx.send("a random reaction image, defined as angry by reactionDB.json")
 
-bot = commands.Bot(command_prefix = '$', intents = intents)
+@bot.command()
+async def sad(ctx):
+    await ctx.send("a random reaction image, defined as sad by reactionDB.json")
 
-client = discord.Client(intents = intents)
-handler = logging.FileHandler(filename = 'discord.log', encoding = 'utf-8', mode = 'w')
+@bot.command()
+async def hug(ctx):
+    await ctx.send("a random reaction image, defined as a hug by reactionDB.json")
 
-client.run("TOKEN REDACTED FOR GITHUB COPY", log_handler = handler)
+@bot.command()
+async def kiss(ctx):
+    await ctx.send("a random reaction image, defined as a kiss by reactionDB.json")
 
-@client.event
-async def on_ready():
-    print(greetingHelper)
+@bot.command()
+async def confused(ctx):
+    await ctx.send("a random reaction image, defined as confused by reactionDB.json")
+
+@bot.command()
+async def happy(ctx):
+    await ctx.send("a random reaction image, defined as happy by reactionDB.json")
+
+@bot.command()
+async def what(ctx):
+    await ctx.send("a random reaction image, defined as 'what the fuck' by reactionDB.json")
+
+@bot.command()
+async def no(ctx):
+    await ctx.send("a random reaction image, defined as 'no' by reactionDB.json")
+
+@bot.command()
+async def yes(ctx):
+    await ctx.send("a random reaction image, defined as 'yes' by reactionDB.json")
+
+@bot.command()
+async def subway(ctx):
+    await ctx.send("https://www.youtube.com/watch?v=y3VRXVvr6XU")
+
+@bot.command()
+async def florida(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/1071547517847732305/1305253566348529696/florida.gif")
+
+# curse check isn't working yet
+@bot.command()
+async def cursecheck(ctx, arg):
+    cursepercent = random.randInt(0, 100)
+    text = f"{arg} is {cursepercent}% cursed."
+    if cursepercent == 69:
+        await interaction.response.send_message(text + " Nice.")
+    else:
+        await interaction.response.send_message(text)
+
+# profit check isn't working yet
+@bot.command()
+async def profitcheck(ctx, arg):
+    profit = random.randInt(0, 100)
+    selftext = f"{interaction.user.mention} is {profit}% profitable."
+    othertext = f"{arg} is {profit} profitable."
+    if profit > 50:
+        await interaction.response.send_message(selftext + " That's great!")
+    else:
+        await interaction.response.send_message(selftext)
+
+bot.run("TOKEN REDACTED FOR GITHUB COPY", log_handler = handler)
 
 # everything below is commented out as reference code for the discord implementation because as it turns out, sending print(whatever) is not how it actually works. functions that are confirmed to be working as intended will be removed from the commented out code as i go    
 """def vibecheck():
@@ -75,7 +146,7 @@ def profitscale():
     else:
         print(text)
 
-# 8ball style "ask yes or no" feature. also works and was easy to make happen
+# 8ball style "ask yes or no" feature
 def askProdbot():
     yes = ["Yes.", "It is certain.", "Absolutely.", "Positively.", "Why not?", "Yeah.", "Definitely.", "For sure.", "By all means."]
     no = ["No.", "Nah.", "Absolutely not.", "Negatory.", "Nein.", "Bad call, boss.", "Doesn't sound work-safe to me.", ":sparkles: No :sparkles:", "Not a chance."] 
@@ -91,11 +162,6 @@ def askProdbot():
     else:
         print(yestext)
 
-# this function will eventually be used to call a random meme from a json file in the directory the bot is running from. i already have a directory borrowed from the friend's bot i'm basing this function on but do not yet know how to make it call a random line from a given area in the list
-def motdGet():
-    with open("motdDB.json") as motd:
-        print(motd.readline())
-
 def motd():
     calendar = datetime.datetime.now()
     month = calendar.month
@@ -104,7 +170,7 @@ def motd():
     hour = calendar.hour
     minute = calendar.minute
     second = calendar.second 
-    # extremely rudimentary time check function. eventual plan is to have this function bind to a channel (probably the bot channel) and post a meme every day based on the day of the week/holiday. as of right now the day check works the way it should and i'm not sure it can get much better without branching into other files, but i don't know how to make a timer without being this incredibly specific about it just yet. help is appreciated, commenting it out for the discord implementation for now so it doesn't freak it the fuck out
+    # extremely rudimentary time check function. eventual plan is to have this function bind to a channel (probably the bot channel) and post a meme every day based on the day of the week/holiday. as of right now the day check works the way it should and i'm not sure it can get much better without branching into other files, but i don't know how to make a timer without being this incredibly specific about it just yet
     if hour == 8 and minute == 0 and second == 1:
         match date:
             case 1:
@@ -290,87 +356,3 @@ def motd():
                     print("saturday meme")
     else:
         pass"""   
-
-@bot.command()
-async def help(ctx):
-    await ctx.send(greetingHelper)
-
-@bot.command()
-async def planned(ctx):
-    await ctx.send(plannedfeatures)
-
-@bot.command()
-async def angery(ctx):
-    await ctx.send("a random reaction image, defined as angry by reactionDB.json")
-
-@bot.command()
-async def sad(ctx):
-    await ctx.send("a random reaction image, defined as sad by reactionDB.json")
-
-@bot.command()
-async def hug(ctx):
-    await ctx.send("a random reaction image, defined as a hug by reactionDB.json")
-
-@bot.command()
-async def kiss(ctx):
-    await ctx.send("a random reaction image, defined as a kiss by reactionDB.json")
-
-@bot.command()
-async def confused(ctx):
-    await ctx.send("a random reaction image, defined as confused by reactionDB.json")
-
-@bot.command()
-async def happy(ctx):
-    await ctx.send("a random reaction image, defined as happy by reactionDB.json")
-
-@bot.command()
-async def what(ctx):
-    await ctx.send("a random reaction image, defined as 'what the fuck' by reactionDB.json")
-
-@bot.command()
-async def no(ctx):
-    await ctx.send("a random reaction image, defined as 'no' by reactionDB.json")
-
-@bot.command()
-async def yes(ctx):
-    await ctx.send("a random reaction image, defined as 'yes' by reactionDB.json")
-
-@bot.command()
-async def subway(ctx):
-    await ctx.send("https://www.youtube.com/watch?v=y3VRXVvr6XU")
-
-@bot.command()
-async def florida(ctx):
-    await ctx.send("https://cdn.discordapp.com/attachments/1071547517847732305/1305253566348529696/florida.gif")
-
-@bot.command()
-async def cursecheck(ctx, arg):
-    cursepercent = random.randInt(0, 100)
-    selftext = f"*Username* is {cursepercent}% cursed."
-    othertext = f"{arg} is {cursepercent}% cursed."
-    if arg == "me":
-        if cursepercent == 69:
-            await ctx.send(selftext + " Nice.")
-        else:
-            await ctx.send(selftext)
-    else:
-        if cursepercent == 69:
-            await ctx.send(othertext + " Nice.")
-        else:
-            await ctx.send(othertext)
-
-@bot.command()
-async def profitcheck(ctx, arg):
-    profit = random.randrange(0, 101)
-    selftext = f"*Username* is {profit}% profitable."
-    othertext = f"{arg} is {profit} profitable."
-    if arg == "me":
-        if profit > 50:
-            await ctx.send(selftext + " That's great!")
-        else:
-            await ctx.send(selftext)
-    else:
-        if profit > 50:
-            await ctx.send(othertext + " That's great!")
-        else:
-            await ctx.send(othertext)
