@@ -21,7 +21,7 @@ async def on_ready():
     print(f"Logged in as {bot.user}. (ID: {bot.user.id})")
     
 @bot.command()
-async def help(ctx): 
+async def helpme(ctx): 
     await ctx.send("""Greetings! My name is John ProdBot, AnyoCorp's Employee of the Month for the past nine years running! 
 
 I'm still under development right now, but at the moment, I'm still happy to check your vibes, tell you how profitable you are today, answer your yes or no questions, or post a meme of the day for you in the mornings. In the future, I'll be able to fetch images, videos and reactions for you, remember your birthday, fetch current special Warframe mission information, and maybe even play some music for you! 
@@ -54,16 +54,12 @@ async def sad(ctx):
     await ctx.send("a random reaction image, defined as sad by reactionDB.json")
 
 @bot.command()
+async def fear(ctx):
+    await ctx.send("a random reaction image, defined as fear by reactionDB.json")
+
+@bot.command()
 async def hug(ctx):
     await ctx.send("a random reaction image, defined as a hug by reactionDB.json")
-
-@bot.command()
-async def kiss(ctx):
-    await ctx.send("a random reaction image, defined as a kiss by reactionDB.json")
-
-@bot.command()
-async def confused(ctx):
-    await ctx.send("a random reaction image, defined as confused by reactionDB.json")
 
 @bot.command()
 async def happy(ctx):
@@ -82,6 +78,30 @@ async def yes(ctx):
     await ctx.send("a random reaction image, defined as 'yes' by reactionDB.json")
 
 @bot.command()
+async def disgust(ctx):
+    await ctx.send("a random reaction image, defined as disgust by reactionDB.json")
+    
+@bot.command()
+async def anguish(ctx):
+    await ctx.send("a random reaction image, defined as anguish by reactionDB.json")
+
+@bot.command()
+async def nut(ctx):
+    await ctx.send("a random reaction image, defined as 'nut' by reactionDB.json")
+
+@bot.command()
+async def clown(ctx):
+    await ctx.send("a random reaction image, defined as 'clown' by reactionDB.json")
+
+@bot.command()
+async def evil(ctx):
+    await ctx.send("a random reaction image, defined as evil by reactionDB.json")
+
+@bot.command()
+async def shutup(ctx):
+    await ctx.send("a random reaction image, defined as 'shut up' by reactionDB.json")
+
+@bot.command()
 async def subway(ctx):
     await ctx.send("https://www.youtube.com/watch?v=y3VRXVvr6XU")
 
@@ -89,28 +109,93 @@ async def subway(ctx):
 async def florida(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/1071547517847732305/1305253566348529696/florida.gif")
 
-# curse check isn't working yet
 @bot.command()
-async def cursecheck(ctx, arg):
-    cursepercent = random.randInt(0, 100)
+async def kill(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/920821252912975872/Tumblr_l_692488891846876.gif?ex=685698de&is=6855475e&hm=bddae18894705be594c691e55207194b410fa8eaf66c2c9105f645542427bf14&")
+
+@bot.command()
+async def sin(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/920821567901032448/Screenshot_20210719-1351082.png?ex=68569929&is=685547a9&hm=2274832e28d73d5ad89c29b202bcb67697155c7a75ba9d6a000bc9c7aecdf437&")
+
+@bot.command()
+async def mysterysolved(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/920821925079580672/Screenshot_20201227-220959_Adblock_Browser.jpg?ex=6856997e&is=685547fe&hm=89732f951d663580e28c2e7dd02be0a696bdb1bc2a9435c853d843d3674600e4&")
+
+@bot.command()
+async def shamecube(ctx):
+    await ctx.send("https://media.discordapp.net/attachments/920819855790325770/921147285201616996/when_ur_weird_kinks_appear_in_any_medium.gif?ex=68567702&is=68552582&hm=e2b017cda8cf7869135abe25b7b3c29e732e69f85ccd7302a212b0eafbcac6c2&=")
+
+@bot.command()
+async def typo(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/923409667013619732/typoinchat.png?ex=6856c904&is=68557784&hm=0ae82fd0b7042ff399344ab12fdc48bb98c6c2bc92b58225a32a5a1af21f3b3b&")
+
+@bot.command()
+async def controversial(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/924618508753567774/D0hpoRPWsAAEzgx.png?ex=68569197&is=68554017&hm=6134b1227373bd055d1d44b223092061f9cf37ff9a12a8e25156b395027610f6&")
+
+@bot.command()
+async def playedyourself(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/924618530970808380/Dz2GUyaX4AAfTLs.png?ex=6856919c&is=6855401c&hm=c716b16568f018f8a2c76e7ca379fa557a309fe6ae939f0aea647c3acfd93c50&")
+
+@bot.command()
+async def apollo(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/920821163079376996/Tumblr_l_41969194844092.jpg?ex=685698c9&is=68554749&hm=5934b7addafcc08d84d2836b5490b3195a702209daa907e6fb39229c0f91f984&")
+
+@bot.command()
+async def right(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/924619346452557904/Screen_Shot_2017-11-06_at_12.41.31_PM.png?ex=6856925e&is=685540de&hm=a31d5fb35501546dba7d03fbe3ed9a03ee27bb086db02307fafb353ca6c9fc8b&")
+
+@bot.command()
+async def dumpster(ctx):
+    await ctx.send("https://tenor.com/view/1997_hello-chat-gif-24146200")
+
+@bot.command()
+async def twitter(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/978476252275040286/tumblr_192794f83de045c36648deadd8e3b6ff_94021001_540.jpg?ex=6856b9c5&is=68556845&hm=01928339bd95c071adacf844fc856db70ab3ceb803b57ad9cbfcf9246cd5e28c&")
+
+@bot.command()
+async def freakshow(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/1043884196495634512/Tumblr_l_204983250472480.jpg?ex=6856b6ea&is=6855656a&hm=36d942bff30f97d21ed06d908fa32aeebbc7bb216ee0bbe2f2fb3ae5e6c109f5&")
+
+@bot.command()
+async def nonsense(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/1062228591997362286/IMG_2424.jpg?ex=6856dfb7&is=68558e37&hm=d2f7d7794a27fd2bf434d76dc5871e110e4b1350b4a06c6ad9830f9f6224d2e5&")
+
+@bot.command()
+async def fakejs(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/1351926442224779315/tumblr_d066eb2362e8bd3407b94e548aec7ea2_f2b7ac64_500.png?ex=6856c29d&is=6855711d&hm=8a29233bcdf3f4f52825c758f31ea3181e62586ea0b7e04f261b5e4d42463cd6&")
+
+@bot.command()
+async def respects(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/924618973574754314/DtDb8TSXcAUg85F.jpg?ex=68569205&is=68554085&hm=7af4739cd83a0e4407412309bb49db6c405509dee02c2227d704af0ba9e9f379&")
+
+def cursecheck():
+    cursepercent = random.randrange(0, 101)
     text = f"{arg} is {cursepercent}% cursed."
     if cursepercent == 69:
-        await interaction.response.send_message(text + " Nice.")
+        print(text + " Nice.")
     else:
-        await interaction.response.send_message(text)
+        print(text) 
+
+# curse check isn't working yet
+@bot.command()
+async def cursescale(ctx, arg):
+        await ctx.send(cursecheck(arg))
+
+def profitcheck():
+    profit = random.randrange(0, 101)
+    text = f"*Username* is {profit}% profitable."
+    if profit > 50:
+        print(text + " That's great!")
+    else:
+        print(text)
 
 # profit check isn't working yet
 @bot.command()
-async def profitcheck(ctx, arg):
-    profit = random.randInt(0, 100)
-    selftext = f"{interaction.user.mention} is {profit}% profitable."
-    othertext = f"{arg} is {profit} profitable."
-    if profit > 50:
-        await interaction.response.send_message(selftext + " That's great!")
-    else:
-        await interaction.response.send_message(selftext)
+async def profitscale(ctx, arg):
+    await ctx.send(profitcheck(arg))
 
-bot.run("TOKEN REDACTED FOR GITHUB COPY", log_handler = handler)
+bot.run("TOKEN REDACTED", log_handler = handler)
 
 # everything below is commented out as reference code for the discord implementation because as it turns out, sending print(whatever) is not how it actually works. functions that are confirmed to be working as intended will be removed from the commented out code as i go    
 """def vibecheck():
@@ -127,24 +212,6 @@ bot.run("TOKEN REDACTED FOR GITHUB COPY", log_handler = handler)
         print(mysterytext)
     else:
         print(passtext)
-
-# can't stand to go without the daily cursescale.
-def cursescale():
-    cursepercent = random.randrange(0, 101)
-    text = f"*Username* is {cursepercent}% cursed."
-    if cursepercent == 69:
-        print(text + " Nice.")
-    else:
-        print(text) 
-
-# a new scale, based on the same idea as the cursescale 
-def profitscale():
-    profit = random.randrange(0, 101)
-    text = f"*Username* is {profit}% profitable."
-    if profit > 50:
-        print(text + " That's great!")
-    else:
-        print(text)
 
 # 8ball style "ask yes or no" feature
 def askProdbot():
