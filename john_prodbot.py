@@ -3,7 +3,7 @@ import datetime
 import time
 import json
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import logging
 import asyncio 
 
@@ -12,13 +12,15 @@ intents.message_content = True
 intents.members = True  
 
 bot = commands.Bot(command_prefix = '$', intents = intents)
-
-client = discord.Client(intents = intents)
 handler = logging.FileHandler(filename = 'discord.log', encoding = 'utf-8', mode = 'w')
 
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}. (ID: {bot.user.id})")
+
+@bot.command()
+async def chk(ctx):
+    await ctx.send(f"ack {round(bot.latency * 1000)}ms")
     
 @bot.command()
 async def helpme(ctx): 
@@ -169,31 +171,25 @@ async def fakejs(ctx):
 async def respects(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/920819855790325770/924618973574754314/DtDb8TSXcAUg85F.jpg?ex=68569205&is=68554085&hm=7af4739cd83a0e4407412309bb49db6c405509dee02c2227d704af0ba9e9f379&")
 
-def cursecheck():
-    cursepercent = random.randrange(0, 101)
-    text = f"{arg} is {cursepercent}% cursed."
-    if cursepercent == 69:
-        print(text + " Nice.")
-    else:
-        print(text) 
+@bot.event
+async def on_message(message: discord.Message) -> None:
+    if message.author.bot:
+        return
 
-# curse check isn't working yet
-@bot.command()
-async def cursescale(ctx, arg):
-        await ctx.send(cursecheck(arg))
+    if message.content == "prodbot how profitable am i":
+        await message.channel.send(f"{message.author} is {random.randrange(0, 101)}% profitable.")
 
-def profitcheck():
-    profit = random.randrange(0, 101)
-    text = f"*Username* is {profit}% profitable."
-    if profit > 50:
-        print(text + " That's great!")
-    else:
-        print(text)
+    await bot.process_commands(message)
 
-# profit check isn't working yet
-@bot.command()
-async def profitscale(ctx, arg):
-    await ctx.send(profitcheck(arg))
+@bot.event
+async def on_message(message: discord.Message) -> None:
+    if message.author.bot:
+        return
+
+    if message.content == "prodbot how cursed am i":
+        await message.channel.send(f"{message.author} is {random.randrange(0, 101)}% cursed.")
+
+    await bot.process_commands(message)
 
 bot.run("TOKEN REDACTED", log_handler = handler)
 
